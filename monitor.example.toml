@@ -1,0 +1,43 @@
+[global]
+poll_interval_seconds = 30
+sqlite_path = "file_monitor.db"
+smtp_profile = "default"
+
+[smtp.default]
+host = "smtp.example.com"
+port = 587
+from = "file-monitor@example.com"
+username_env = "FM_SMTP_USER"
+password_env = "FM_SMTP_PASS"
+
+[[watch]]
+id = "downloads"
+path = "/Users/dir/Downloads"
+quiet_minutes = 5
+enabled = true
+script = "/Users/dir/bin/process_download.sh"
+script_timeout_seconds = 600
+email_to = ["ops@example.com"]
+email_subject = "Downloads transfer settled"
+
+[[watch]]
+id = "logs_only"
+path = "/tmp/inbox"
+quiet_minutes = 2
+enabled = true
+# No script and no email: trigger will be logged only.
+
+[[watch]]
+id = "script_only"
+path = "/tmp/uploads"
+quiet_minutes = 3
+enabled = true
+script = "/Users/dir/bin/process_upload.sh"
+
+[[watch]]
+id = "email_only"
+path = "/tmp/reports"
+quiet_minutes = 10
+enabled = true
+email_to = ["alerts@example.com"]
+email_subject = "Reports directory is stable"

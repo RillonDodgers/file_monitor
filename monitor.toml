@@ -1,0 +1,19 @@
+[global]
+poll_interval_seconds = 10
+sqlite_path = "file_monitor.db"
+smtp_profile = "default"
+
+[smtp.default]
+host = "smtp.gmail.com"
+port = 587
+from = "dillonrodgers73+filemonitor@gmail.com"
+username_env = "FM_SMTP_USER"
+password_env = "FM_SMTP_PASS"
+
+[[watch]]
+id = "downloads"
+path = "/Users/dir/Downloads/test_dir"
+quiet_minutes = 1
+enabled = true
+email_to = ["dillonrodgers73@gmail.com"]
+email_subject = "Downloads transfer settled"
